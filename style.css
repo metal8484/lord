@@ -1,23 +1,22 @@
-/* =========================
-   RESET
-========================= */
+/* RESET */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-/* =========================
-   BASE
-========================= */
 html,
 body {
-  width: 100%;
-  min-height: 100%;
+  height: 100%;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #ffffff;
-  color: #111827;
+}
+
+/* BASE */
+body {
   line-height: 1.6;
+  font-size: 1rem;
+  background-color: white;
+  color: white;
 }
 
 h1,
@@ -27,19 +26,60 @@ h4,
 h5,
 h6 {
   font-weight: 600;
+  margin-bottom: 0.5rem;
 }
 
 p {
-  margin-bottom: 0.75rem;
+  margin-bottom: 0.5rem;
 }
 
-/* =========================
-   HEADER
-========================= */
-.header {
-  background: navy;
+/* LINKS */
+.sidebar a,
+.content a {
+  position: relative;
   color: white;
-  padding: 1.2rem 2rem;
+  text-decoration: none;
+  padding-left: 1.5rem;
+  border-bottom: 2px solid transparent;
+  transition:
+    color 0.3s ease,
+    border-bottom 0.3s ease;
+}
+
+.sidebar a::before,
+.content a::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%) scale(0);
+  width: 0.6rem;
+  height: 0.6rem;
+  background-color: #ffdd00;
+  border-radius: 50%;
+  opacity: 0;
+  transition:
+    transform 0.3s ease,
+    opacity 0.3s ease;
+}
+
+.sidebar a:hover,
+.content a:hover {
+  color: yellow;
+  border-bottom: 2px solid yellow;
+}
+
+.sidebar a:hover::before,
+.content a:hover::before {
+  transform: translateY(-50%) scale(1.3);
+  opacity: 1;
+}
+
+/* HEADER */
+.header {
+  background-color: navy;
+  color: white;
+  padding: 1rem 2rem;
 }
 
 .header-top {
@@ -47,7 +87,6 @@ p {
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
-  gap: 1rem;
 }
 
 .logo {
@@ -58,16 +97,18 @@ p {
 .nav {
   display: flex;
   gap: 1.5rem;
+  flex-wrap: wrap;
 }
 
 .nav a {
   color: white;
+  font-weight: bold;
   text-decoration: none;
-  font-weight: 600;
+  transition: color 0.3s ease;
 }
 
 .nav a:hover {
-  color: #ffdd00;
+  color: yellow;
 }
 
 .header-btn-msg {
@@ -77,270 +118,330 @@ p {
 }
 
 #perfom {
-  background: #ffdd00;
+  background-color: yellow;
   color: navy;
   border: none;
   padding: 0.5rem 1rem;
   font-weight: bold;
-  border-radius: 0.3rem;
   cursor: pointer;
+  border-radius: 0.25rem;
 }
 
 #msg {
-  font-size: 0.9rem;
-  border: 3px solid #ffdd00;
-  padding: 0.3rem 0.6rem;
-  border-radius: 0.4rem;
+  color: white;
+  font-size: 1rem;
+  border: 4px solid rgba(169, 217, 236, 0.486);
+  padding: 0.25rem 0.5rem;
 }
 
-/* =========================
-   HERO TEXT
-========================= */
+/* HERO TEXT */
 .hero-text {
-  margin-top: 1rem;
+  width: 100%;
   text-align: center;
-  background: rgba(0, 0, 0, 0.35);
-  padding: 1.2rem;
-  border-radius: 0.6rem;
+  background-color: rgba(0, 0, 0, 0.35);
+  padding: 1rem 0;
+  border-radius: 0.5rem;
 }
 
 .hero-text h1 {
   font-size: 2rem;
+  margin-bottom: 0.5rem;
 }
 
 .hero-text p {
-  color: #e5e7eb;
+  font-size: 1.2rem;
+  color: #ddd;
 }
 
-/* =========================
-   CONTENT MESSAGE BOX
-========================= */
-
+/* CONTENT MESSAGE */
 #contentmsg {
-  position: absolute;
-  top: 200px;
-  right: 50px;
-  background: #000;
-  color: white;
-  padding: 1rem;
-  border: 4px solid skyblue;
-  border-radius: 1rem;
-  font-size: 0.95rem;
-  max-width: 260px;
+  border: 2px solid red;
+  padding: 5px;
+  background-color: #f5f5f5;
+  color: black;
   text-align: center;
 }
-/* =========================
-   MAIN LAYOUT
-========================= */
+
+/* MAIN FLEX LAYOUT */
 .main {
   display: flex;
   gap: 2rem;
-  padding: 2rem;
+  padding: 1.5rem;
   background: url("bg.jpg") center bottom / cover no-repeat;
-  min-height: 65vh;
+  min-height: 60vh;
 }
 
 .sidebar {
-  width: 260px;
-  background: rgba(0, 0, 0, 0.35);
-  color: white;
-  padding: 1.2rem;
-  border-radius: 0.6rem;
-}
-
-.sidebar a {
-  color: #ffdd00;
-  text-decoration: none;
+  flex: 0 0 250px;
+  background: rgba(0, 0, 0, 0.3);
+  padding: 1rem;
+  border-radius: 0.5rem;
 }
 
 .content {
   flex: 1;
-  background: rgba(0, 0, 0, 0.25);
-  color: white;
+  background: rgba(0, 0, 0, 0.2);
   padding: 1.5rem;
-  border-radius: 0.6rem;
+  border-radius: 0.5rem;
 }
 
-/* =========================
-   GALLERY SECTION
-========================= */
-.gallery {
-  padding: 3rem 1.5rem;
-  background-color: rgba(255, 255, 255, 0.95);
+/* TEXT SHADOW */
+.sidebar p,
+.sidebar h1,
+.sidebar h2,
+.sidebar h3,
+.content p,
+.content h1,
+.content h2,
+.content h3 {
+  text-shadow: 0.12rem 0.12rem 0.25rem rgba(0, 0, 0, 0.8);
+}
+
+/* FOOTER */
+.footer {
+  background-color: navy;
+  color: white;
   text-align: center;
+  padding: 1rem 0;
+  font-size: 0.9rem;
+  border-top: 0.1rem solid rgb(55, 221, 180);
 }
 
-.gallery h2 {
-  color: navy;
-  font-size: 2rem;
-  margin-bottom: 2rem;
-  font-weight: 700;
-  letter-spacing: 1px;
+/* RESPONSIVE */
+@media (max-width: 1024px) {
+  .nav {
+    gap: 1rem;
+  }
+  .hero-text h1 {
+    font-size: 1.7rem;
+  }
+  .hero-text p {
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .header-top {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .nav {
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 1rem;
+    text-align: center;
+  }
+
+  .header-btn-msg {
+    margin-top: 0.5rem;
+  }
+
+  .hero-text h1 {
+    font-size: 1.5rem;
+  }
+  .hero-text p {
+    font-size: 1rem;
+  }
+
+  .main {
+    flex-direction: column;
+  }
+  .content {
+    max-width: 100%;
+  }
+}
+
+/* ========================= */
+/* SLIDER (FIT SCREEN - NO CROP) */
+/* ========================= */
+
+/* SLIDER */
+/* ========================= */
+/* SLIDER (RIGHT EXTREME) */
+/* ========================= */
+
+/* ========================= */
+/* SLIDER WRAPPER (RIGHT END) */
+/* ========================= */
+
+/* ========================= */
+/* SLIDER EXTREME RIGHT (SIMPLE) */
+/* ========================= */
+
+/* ========================= */
+/* SLIDER AREA (EXTREME RIGHT) */
+/* ========================= */
+
+.slider-area {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end; /* push to extreme right */
+  padding: 10px 15px;
+}
+
+.slider-container {
+  width: 60%;
+  max-width: 750px;
+  height: 45vh;
+  background: #f5f5f5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+/* mobile center */
+@media (max-width: 768px) {
+  .slider-area {
+    justify-content: center;
+  }
+
+  .slider-container {
+    width: 95%;
+  }
+}
+/* mobile center */
+
+#slide-image {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  transition: opacity 0.4s ease-in-out;
+}
+
+/* ========================= */
+/* GALLERY */
+/* ========================= */
+
+.gallery {
+  padding: 20px 15px;
+  text-align: center;
 }
 
 .gallery-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 12px;
 }
 
-.gallery-item {
-  position: relative;
-  overflow: hidden;
-  border-radius: 0.75rem;
-  cursor: pointer;
-  transition:
-    transform 0.3s ease,
-    box-shadow 0.3s ease;
-}
-
-.gallery-item img {
+.gallery-grid img {
   width: 100%;
-  height: 200px;
+  height: 170px;
   object-fit: cover;
-  display: block;
+  border-radius: 10px;
+  cursor: pointer;
   transition: transform 0.3s ease;
 }
 
-.gallery-item:hover {
-  transform: scale(1.02);
-  box-shadow: 0 0.75rem 1.5rem rgba(0, 0, 0, 0.3);
-}
-
-.gallery-item:hover img {
+.gallery-grid img:hover {
   transform: scale(1.05);
 }
 
-.caption {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  background: rgba(0, 0, 128, 0.6);
-  color: white;
-  padding: 0.5rem 0;
-  font-size: 0.9rem;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
+/* ========================= */
+/* LIGHTBOX MODAL */
+/* ========================= */
 
-.gallery-item:hover .caption {
-  opacity: 1;
-}
+/* ========================= */
+/* LIGHTBOX (LEFT SIDE POPUP) */
+/* ========================= */
 
-/* LIGHTBOX */
 .lightbox {
   position: fixed;
   top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  left: 5%; /* move to left side */
+  transform: translateY(-50%);
+  background: white;
+  padding: 20px;
+  border-radius: 14px;
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.45);
   display: none;
-  justify-content: center;
-  align-items: center;
-  background: rgba(0, 0, 0, 0.6);
-  z-index: 10000;
-  padding: 1rem;
-  border-radius: 0.6rem;
-  max-width: 90%;
-  max-height: 90%;
-  box-shadow: 0 0 2rem rgba(0, 0, 0, 0.5);
+  z-index: 999;
+  text-align: center;
 }
 
-.lightbox-img {
-  width: 50vw;
-  max-height: 50vh;
+.lightbox img {
+  max-width: 60vw; /* smaller so it stays left */
+  max-height: 70vh;
   object-fit: contain;
-  border-radius: 0.5rem;
+  border-radius: 10px;
 }
 
-.lightbox .close {
+#lightbox-close {
   position: absolute;
-  top: 1rem;
-  right: 1rem;
-  font-size: 2rem;
-  color: white;
+  top: 8px;
+  right: 12px;
+  font-size: 24px;
   cursor: pointer;
 }
 
-/* GALLERY NAVIGATION BUTTONS */
-.gallery-nav {
-  margin-top: 1rem;
-  display: flex;
-  justify-content: center;
-  gap: 1rem;
-}
-
-.gallery-nav button {
-  padding: 0.5rem 1rem;
-  background: navy;
-  color: white;
+.lightbox-btn {
+  background: none;
   border: none;
-  border-radius: 0.3rem;
+  font-size: 32px;
   cursor: pointer;
-  font-weight: bold;
+  margin: 0 20px;
 }
 
-.gallery-nav button:hover {
-  background: #ffdd00;
-  color: navy;
+@media (max-width: 768px) {
+  .slider {
+    justify-content: center;
+  }
+
+  .slider-container {
+    width: 95%;
+  }
 }
 
-/* =========================
-   HISTORY
-========================= */
+/* ========================= */
+/* HISTORY SECTION */
+/* ========================= */
+
 .history {
-  padding: 3rem 6%;
-  background: #f9fafb;
-  color: #111827;
+  padding: 20px;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  margin: 15px;
 }
 
 .history h2 {
-  font-size: 2rem;
-  margin-bottom: 1rem;
+  margin-bottom: 10px;
 }
 
-/* =========================
-   FOOTER
-========================= */
-.footer {
-  background: navy;
+#clear-history {
+  padding: 6px 12px;
+  background: red;
   color: white;
-  text-align: center;
-  padding: 1.2rem;
-  font-size: 0.9rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-bottom: 10px;
 }
 
-/* =========================
-   RESPONSIVE
-========================= */
-@media (max-width: 768px) {
-  .header-top {
-    flex-direction: column;
-    text-align: center;
-  }
-  .nav {
-    flex-direction: column;
-    gap: 1rem;
-  }
-  .main {
-    flex-direction: column;
-  }
-  .sidebar {
-    width: 100%;
-  }
-  #contentmsg {
-    right: 50%;
-    transform: translateX(50%);
-    top: 150px;
-  }
-  .gallery h2 {
-    font-size: 1.6rem;
-  }
-  .gallery-item img {
-    height: 160px;
-  }
-  .lightbox-img {
-    width: 80vw;
-    max-height: 40vh;
-  }
+#history-list {
+  list-style: none;
+  padding: 0;
+}
+
+#history-list li {
+  padding: 8px;
+  background: rgb(235, 201, 201);
+  margin-bottom: 5px;
+  border-radius: 5px;
+}
+
+.story-text {
+  padding: 20px;
+  background: rgb(48, 50, 51);
+  border-radius: 10px;
+  margin: 15px;
+}
+
+.story-text h2 {
+  margin-bottom: 10px;
+}
+
+.story-text p {
+  margin-bottom: 10px;
 }

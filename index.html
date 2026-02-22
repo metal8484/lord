@@ -11,17 +11,20 @@
     <header class="header">
       <div class="header-top">
         <div class="logo">Lord Luke.Tech</div>
+
         <nav class="nav">
-          <a href="#" id="homeLink">Home</a>
+          <a href="#" id="homeLink">home</a>
           <a href="#" id="aboutLink">About</a>
           <a href="#" id="projectsLink">Projects</a>
           <a href="#" id="contactLink">Contact</a>
         </nav>
+
         <div class="header-btn-msg">
           <button id="perfom">Click me</button>
-          <p id="msg">Hello!</p>
+          <p id="msg">hello</p>
         </div>
       </div>
+
       <div class="hero-text">
         <h1>Welcome to Lord Luke.Tech</h1>
         <p>Your Journey to Professional Web Development</p>
@@ -30,7 +33,7 @@
 
     <!-- NAVIGATION CONTENT MESSAGE -->
     <div class="luke">
-      <p id="contentmsg">Click a link to see content here.</p>
+      <p id="contentmsg">clickme and see</p>
     </div>
 
     <!-- MAIN FLEX LAYOUT -->
@@ -61,41 +64,62 @@
       </section>
     </main>
 
-    <!-- GALLERY SECTION -->
-    <section class="gallery">
-      <h2>Gallery</h2>
-      <div class="gallery-grid" id="galleryGrid"></div>
-      <div class="gallery-nav">
-        <button id="prevBtn">Previous</button>
-        <button id="nextBtn">Next</button>
+    <!-- SLIDER (after main) -->
+    <!-- SLIDER AREA (EXTREME RIGHT) -->
+    <section class="slider-area">
+      <div class="slider-container">
+        <img id="slide-image" src="" alt="slider image" />
       </div>
     </section>
+    <!-- GALLERY -->
+    <section class="gallery">
+      <h2>Gallery</h2>
+      <div id="gallery-grid" class="gallery-grid"></div>
+    </section>
 
-    <!-- HISTORY SECTION -->
-    <section class="history">
-      <h2>History</h2>
+    <section class="story-text">
+      <h2>Our Story</h2>
       <p>
-        Lord Luke.Tech started as a learning project and has grown into a
-        professional web platform. Our goal is to showcase technology,
-        creativity, and learning resources for developers and students
-        worldwide.
+        Lord Luke.Tech was born from a dream — a dream to build technology that
+        empowers young developers and creates opportunity. It started as a small
+        learning journey, a desire to understand web development, coding, and
+        the digital world.
       </p>
       <p>
-        In the future, we plan to add interactive features, AI projects, and
-        galleries of work to entertain and educate visitors.
+        Step by step, ideas became projects. Projects became knowledge.
+        Knowledge became growth. Today Lord Luke.Tech stands as a place of
+        creativity and learning — a platform where ideas meet technology.
+      </p>
+      <p>
+        This journey is not just about code. It is about discipline,
+        persistence, and the belief that technology can change lives. Every line
+        of code written is a step forward. Every project built is a lesson
+        learned.
+      </p>
+      <p>
+        Welcome to Lord Luke.Tech — where learning never ends and possibilities
+        are endless.
       </p>
     </section>
+
+    <section class="history">
+      <h2>History</h2>
+      <button id="clear-history">Clear History</button>
+      <ul id="history-list"></ul>
+    </section>
+
+    <!-- LIGHTBOX MODAL -->
+    <div id="lightbox" class="lightbox">
+      <span id="lightbox-close">&times;</span>
+      <button id="lightbox-prev" class="lightbox-btn">&#8249;</button>
+      <img id="lightbox-img" src="" alt="lightbox image" />
+      <button id="lightbox-next" class="lightbox-btn">&#8250;</button>
+    </div>
 
     <!-- FOOTER -->
     <footer class="footer">
-      <p>&copy; 2026 Lord Luke.Tech | All Rights Reserved</p>
+      <p>&copy; 2025 Lord Luke.Tech | All Rights Reserved</p>
     </footer>
-
-    <!-- LIGHTBOX -->
-    <div class="lightbox" id="lightbox">
-      <span class="close" id="close">&times;</span>
-      <img class="lightbox-img" id="lightboxImg" src="" alt="" />
-    </div>
 
     <!-- SCRIPT -->
     <script src="script.js"></script>

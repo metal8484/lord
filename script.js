@@ -6,152 +6,233 @@ let msg = document.getElementById("msg");
 btn.addEventListener("click", function () {
   if (!toggled) {
     msg.textContent = "I Luke loves coding very much, so help me God";
-    msg.style.color = "#fff";
+    msg.style.color = "rgb(248, 246, 244)";
     msg.style.backgroundColor = "transparent";
     msg.style.fontSize = "15px";
     toggled = true;
   } else {
     msg.textContent = "of mode";
-    msg.style.color = "#000";
+    msg.style.color = "black";
     msg.style.backgroundColor = "transparent";
     msg.style.fontSize = "14px";
     toggled = false;
   }
 });
 
-// NAVIGATION CONTENT
+// NAVIGATION CONTENT SYSTEM
 let home = document.getElementById("homeLink");
 let about = document.getElementById("aboutLink");
 let project = document.getElementById("projectsLink");
 let contact = document.getElementById("contactLink");
-let contentMsg = document.getElementById("contentmsg");
 
-home.addEventListener("click", (e) => {
+let contentMsg = document.getElementById("contentmsg");
+contentMsg.style.position = "absolute";
+contentMsg.style.top = "225px";
+contentMsg.style.right = "50px";
+contentMsg.style.borderRadius = "1rem";
+
+home.addEventListener("click", function (e) {
   e.preventDefault();
   contentMsg.textContent =
     "Welcome to my home page, relax — we are prepared to equip you brother";
-  contentMsg.style.color = "#000";
-  contentMsg.style.backgroundColor = "#fcfbfd";
+  contentMsg.style.color = "rgb(11, 12, 12)";
+  contentMsg.style.backgroundColor = "rgb(252, 251, 253)";
   contentMsg.style.fontSize = "16px";
 });
-about.addEventListener("click", (e) => {
+about.addEventListener("click", function (e) {
   e.preventDefault();
-  contentMsg.textContent = "About me — I am Lord Luke";
-  contentMsg.style.color = "#000";
-  contentMsg.style.backgroundColor = "#fcfbfd";
+  contentMsg.textContent = "about me ,am lord luke";
+  contentMsg.style.color = "rgb(11, 12, 12)";
+  contentMsg.style.backgroundColor = "rgb(252, 251, 253)";
   contentMsg.style.fontSize = "16px";
 });
-project.addEventListener("click", (e) => {
+
+project.addEventListener("click", function (e) {
   e.preventDefault();
   contentMsg.textContent =
-    "We are building the most powerful AI platform. The future is here.";
-  contentMsg.style.color = "#000";
-  contentMsg.style.backgroundColor = "#fcfdff";
+    "We are building the most powerful AI platform  the future is here.";
+  contentMsg.style.color = "rgb(12, 14, 13)";
+  contentMsg.style.backgroundColor = "rgb(252, 253, 255)";
   contentMsg.style.fontSize = "16px";
 });
-contact.addEventListener("click", (e) => {
+contact.addEventListener("click", function (e) {
   e.preventDefault();
-  contentMsg.textContent = "You really challenged me, I swear!";
-  contentMsg.style.color = "#000";
-  contentMsg.style.backgroundColor = "#ebebeb";
+
+  contentMsg.textContent = "you realy troubled me, i swwer";
+  contentMsg.style.color = "rgb(10, 10, 10)";
+  contentMsg.style.backgroundColor = "rgb(235, 235, 235)";
   contentMsg.style.fontSize = "16px";
 });
 
-// =========================
-// GALLERY DATA
-// =========================
-const galleryImages = [
-  "images/lab1.jpg",
-  "images/lab2.jpg",
-  "images/lab3.jpg",
-  "images/lab4.jpg",
-  "images/lab5.jpg",
-  "images/lab6.jpg",
-  "images/lab7.jpg",
-  "images/lab8.jpg",
-  "images/lab9.jpg",
-  "images/lab10.jpg",
-  "images/lab11.jpg",
-  "images/lab12.jpg",
-  "images/lab13.jpg",
-  "images/lab14.jpg",
-  "images/lab15.jpg",
-  "images/lab16.jpg",
-  "images/lab17.jpg",
-  "images/lab18.jpg",
-  "images/lab19.jpg",
-  "images/lab20.jpg",
-  "images/lab21.jpg",
-  "images/lab22.jpg",
-  "images/lab23.jpg",
-  "images/lab24.jpg",
-  "images/lab26.jpg",
-  "images/lab27.jpg",
-];
+// =============================
+// PROFESSIONAL SLIDER (PNG + JPG)
+// =============================
 
-const galleryGrid = document.getElementById("galleryGrid");
-const lightbox = document.getElementById("lightbox");
-const lightboxImg = document.getElementById("lightboxImg");
-const closeBtn = document.getElementById("close");
-const prevBtn = document.getElementById("prevBtn");
-const nextBtn = document.getElementById("nextBtn");
+const totalImages = 18;
+let images = [];
 
-let currentPage = 1;
-const itemsPerPage = 7;
-const totalPages = Math.ceil(galleryImages.length / itemsPerPage);
-
-// =========================
-// FUNCTION TO RENDER PAGE
-// =========================
-function renderGallery() {
-  galleryGrid.innerHTML = "";
-  let start = (currentPage - 1) * itemsPerPage;
-  let end = start + itemsPerPage;
-  galleryImages.slice(start, end).forEach((src, idx) => {
-    let div = document.createElement("div");
-    div.classList.add("gallery-item");
-    div.innerHTML = `<img src="${src}" alt="Lab ${start + idx + 1}"/><div class="caption">Lab ${start + idx + 1}</div>`;
-    galleryGrid.appendChild(div);
-
-    // Add click lightbox
-    div.querySelector("img").addEventListener("click", () => {
-      lightbox.style.display = "flex";
-      lightboxImg.src = src;
-    });
-  });
-
-  // Disable/Enable buttons
-  prevBtn.disabled = currentPage === 1;
-  nextBtn.disabled = currentPage === totalPages;
+// Generate image paths
+for (let i = 1; i <= totalImages; i++) {
+  images.push(`images/imag${i}.png`);
+  images.push(`images/imag${i}.jpg`);
 }
 
-// =========================
-// PAGINATION BUTTONS
-// =========================
-prevBtn.addEventListener("click", () => {
-  if (currentPage > 1) {
-    currentPage--;
-    renderGallery();
-  }
-});
-nextBtn.addEventListener("click", () => {
-  if (currentPage < totalPages) {
-    currentPage++;
-    renderGallery();
-  }
+// Preload and keep valid images
+let validImages = [];
+let loadedCount = 0;
+
+images.forEach((src) => {
+  const img = new Image();
+  img.src = src;
+
+  img.onload = () => {
+    validImages.push(src);
+    loadedCount++;
+
+    if (loadedCount === images.length) {
+      startSlider();
+      buildGallery();
+    }
+  };
+
+  img.onerror = () => {
+    loadedCount++;
+
+    if (loadedCount === images.length) {
+      startSlider();
+      buildGallery();
+    }
+  };
 });
 
-// =========================
-// LIGHTBOX CLOSE
-// =========================
-closeBtn.addEventListener("click", () => {
+function startSlider() {
+  if (validImages.length === 0) return;
+
+  const slideImage = document.getElementById("slide-image");
+  let index = 0;
+
+  slideImage.src = validImages[0];
+
+  setInterval(() => {
+    index++;
+    if (index >= validImages.length) {
+      index = 0;
+    }
+
+    slideImage.style.opacity = 0;
+
+    setTimeout(() => {
+      slideImage.src = validImages[index];
+      slideImage.style.opacity = 1;
+    }, 400);
+  }, 3500);
+}
+
+// =============================
+// GALLERY BUILDER (dynamic)
+// =============================
+
+let currentIndex = 0;
+
+function buildGallery() {
+  const grid = document.getElementById("gallery-grid");
+
+  if (!grid) return;
+  grid.innerHTML = "";
+
+  validImages.forEach((src, index) => {
+    const img = document.createElement("img");
+    img.src = src;
+    img.alt = "gallery image";
+
+    img.onclick = () => {
+      openLightbox(index);
+    };
+
+    grid.appendChild(img);
+  });
+}
+
+// =============================
+// LIGHTBOX MODAL
+// =============================
+
+const lightbox = document.getElementById("lightbox");
+const lightboxImg = document.getElementById("lightbox-img");
+const lightboxClose = document.getElementById("lightbox-close");
+
+function openLightbox(index) {
+  currentIndex = index;
+  lightbox.style.display = "block";
+  lightboxImg.src = validImages[currentIndex];
+
+  addHistory("Viewed image: " + validImages[currentIndex]);
+}
+document.getElementById("lightbox-next").onclick = () => {
+  currentIndex++;
+  if (currentIndex >= validImages.length) currentIndex = 0;
+  lightboxImg.src = validImages[currentIndex];
+};
+
+document.getElementById("lightbox-prev").onclick = () => {
+  currentIndex--;
+  if (currentIndex < 0) currentIndex = validImages.length - 1;
+  lightboxImg.src = validImages[currentIndex];
+};
+
+lightboxClose.onclick = () => {
   lightbox.style.display = "none";
-});
+};
+
+// CLOSE LIGHTBOX WHEN CLICKING OUTSIDE IMAGE (optional)
 lightbox.addEventListener("click", (e) => {
-  if (e.target === lightbox) lightbox.style.display = "none";
+  if (e.target === lightbox) {
+    lightbox.style.display = "none";
+  }
 });
 
-// =========================
-// INITIAL RENDER
-// =========================
-renderGallery();
+// =============================
+// HISTORY (LOCAL STORAGE)
+// =============================
+
+let historyList = document.getElementById("history-list");
+let clearBtn = document.getElementById("clear-history");
+
+// load history on start
+function loadHistory() {
+  let saved = localStorage.getItem("history");
+  if (!saved) return;
+
+  let items = JSON.parse(saved);
+  items.forEach((text) => addHistory(text, false));
+}
+
+function addHistory(text, save = true) {
+  if (!historyList) return;
+
+  let li = document.createElement("li");
+  li.textContent = text;
+  historyList.prepend(li);
+
+  if (save) saveHistory();
+}
+
+function saveHistory() {
+  let items = [];
+  historyList.querySelectorAll("li").forEach((li) => {
+    items.push(li.textContent);
+  });
+
+  localStorage.setItem("history", JSON.stringify(items));
+}
+
+// clear history
+if (clearBtn) {
+  clearBtn.onclick = () => {
+    localStorage.removeItem("history");
+    historyList.innerHTML = "";
+  };
+}
+
+// load on start
+loadHistory();
